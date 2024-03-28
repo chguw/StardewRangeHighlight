@@ -1,6 +1,13 @@
 
 # Release Notes
 
+## Version 4.1.0
+
+### User-visible Changes
+
+* Added support for the Mushroom Log
+* Added Chinese translation, thanks to nexusmods user zephyrus2002
+
 ## Version 4.0.2
 
 ### User-visible Changes

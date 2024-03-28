@@ -106,6 +106,7 @@ namespace RangeHighlight {
             public bool[,] prismaticSprinkler;
             public bool[,] radioactiveSprinkler;
             public readonly bool[,] beehouse;
+            public readonly bool[,] mushroomLog;
             public const int scarecrowRadius = 8;
             public readonly bool[,] scarecrow;
             public const int deluxeScarecrowRadius = 16;
@@ -138,6 +139,7 @@ namespace RangeHighlight {
                 prismaticSprinkler = api.GetSquareCircle(3);
                 radioactiveSprinkler = api.GetSquareCircle(3);
                 beehouse = api.GetManhattanCircle(5);
+                mushroomLog = api.GetSquareCircle(3);
                 scarecrow = api.GetCartesianCircleWithTruncate(scarecrowRadius);
                 deluxeScarecrow = api.GetCartesianCircleWithTruncate(deluxeScarecrowRadius);
                 SetJunimoRange(8);
@@ -276,9 +278,9 @@ namespace RangeHighlight {
                     if (item is StardewValley.Object obj) {
                         var machineData = obj.GetMachineData();
                         if (machineData is not null && machineData.OutputRules is not null) {
-                            foreach(var rule in machineData.OutputRules) {
-                                foreach(var outputItem in rule.OutputItem) {
-                                    foreach(string s in ArgUtility.SplitBySpace(outputItem.ItemId)) {
+                            foreach (var rule in machineData.OutputRules) {
+                                foreach (var outputItem in rule.OutputItem) {
+                                    foreach (string s in ArgUtility.SplitBySpace(outputItem.ItemId)) {
                                         if (s == "NEARBY_FLOWER_ID") {
                                             return new Tuple<Color, bool[,]>(config.BeehouseRangeTint, defaultShapes.beehouse);
                                         }
@@ -291,6 +293,20 @@ namespace RangeHighlight {
                     //if (item.Name.ToLowerInvariant().Contains("bee house")) {
                     //    return new Tuple<Color, bool[,]>(config.BeehouseRangeTint, defaultShapes.beehouse);
                     //}
+                    return null;
+                });
+            api.AddItemRangeHighlighter("jltaylor-us.RangeHighlight/mushroom-log",
+                () => config.ShowMushroomLogRange,
+                () => config.ShowMushroomLogRangeKey,
+                () => config.ShowOtherMushroomLogsWhenHoldingMushroomLog,
+                (item) => {
+                    if (item.QualifiedItemId == "(BC)MushroomLog") {
+                        return new Tuple<Color, bool[,]>(config.MushroomLogRangeTint, defaultShapes.mushroomLog);
+                    }
+                    // we _could_ instead search the object's MachineData (as beehouses do above) and look for
+                    // things with an output rule that has an outputItem that has an OutputMethod that is
+                    // StardewValley.Object.OutputMushroomLog, but that seems awfully complicated given that
+                    // any modded item defined that way might not _want_ a highlight in the same color.
                     return null;
                 });
             bool bombsShownThisFrame = false;

@@ -1,4 +1,4 @@
-﻿// Copyright 2020 Jamie Taylor
+﻿// Copyright 2020-2024 Jamie Taylor
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;

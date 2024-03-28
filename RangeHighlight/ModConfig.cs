@@ -1,4 +1,4 @@
-﻿// Copyright 2020-2022 Jamie Taylor
+﻿// Copyright 2020-2024 Jamie Taylor
 using System;
 using StardewModdingAPI;
 using Microsoft.Xna.Framework;
@@ -18,6 +18,7 @@ namespace RangeHighlight {
         public bool ShowSprinklerRange { get; set; } = true;
         public bool ShowScarecrowRange { get; set; } = true;
         public bool ShowBeehouseRange { get; set; } = true;
+        public bool ShowMushroomLogRange { get; set; } = true;
         public bool ShowBombRange { get; set; } = true;
 
         public bool HighlightBuildingsOnMouseover { get; set; } = true;
@@ -25,6 +26,7 @@ namespace RangeHighlight {
         public bool ShowOtherSprinklersWhenHoldingSprinkler { get; set; } = true;
         public bool ShowOtherScarecrowsWhenHoldingScarecrow { get; set; } = true;
         public bool ShowOtherBeehousesWhenHoldingBeehouse { get; set; } = false;
+        public bool ShowOtherMushroomLogsWhenHoldingMushroomLog { get; set; } = false;
 
         public bool showHeldBombRange { get; set; } = true;
         public bool showPlacedBombRange { get; set; } = true;
@@ -33,8 +35,9 @@ namespace RangeHighlight {
         public bool showBombOuterRange { get; set; } = true;
         public KeybindList ShowAllRangesKey { get; set; } = KeybindList.ForSingle(SButton.LeftShift);
         public KeybindList ShowSprinklerRangeKey { get; set; } = KeybindList.ForSingle(SButton.R);
-        public KeybindList ShowScarecrowRangeKey { get; set; } = KeybindList.ForSingle(SButton.O);
+        public KeybindList ShowScarecrowRangeKey { get; set; } = KeybindList.ForSingle(SButton.O); 
         public KeybindList ShowBeehouseRangeKey { get; set; } = KeybindList.ForSingle(SButton.H);
+        public KeybindList ShowMushroomLogRangeKey { get; set; } = KeybindList.Parse("None");
         public KeybindList ShowJunimoRangeKey { get; set; } = KeybindList.ForSingle(SButton.J);
         public bool hotkeysToggle { get; set; } = false;
 
@@ -42,6 +45,7 @@ namespace RangeHighlight {
         public Color SprinklerRangeTint { get; set; } = new Color(0.6f, 0.6f, 0.9f, 0.7f);
         public Color ScarecrowRangeTint { get; set; } = new Color(0.6f, 1.0f, 0.6f, 0.7f);
         public Color BeehouseRangeTint { get; set; } = new Color(1.0f, 1.0f, 0.6f, 0.7f);
+        public Color MushroomLogRangeTint { get; set; } = new Color(32, 93, 150, 178);
         public Color BombRangeTint { get; set; } = new Color(1.0f, 0.5f, 0.5f, 0.6f);
         public Color BombInnerRangeTint { get; set; } = new Color(8.0f, 0.7f, 0.5f, 0.1f);
         public Color BombOuterRangeTint { get; set; } = new Color(9.0f, 0.7f, 0.5f, 0.8f);
@@ -204,7 +208,35 @@ namespace RangeHighlight {
                 name: I18n.Config_Tint,
                 tooltip: I18n.Config_Beehouse_Tint_Tooltip,
                 getValue: () => theMod.config.BeehouseRangeTint,
-                setValue: (v) => theMod.config.BeehouseRangeTint = v,
+                setValue: (v) => theMod.config.MushroomLogRangeTint = v,
+                colorPickerStyle: defaultColorPickerStyle);
+
+            // MushroomLogs
+            gmcm.AddSectionTitle(mod, I18n.Config_MushroomLog);
+            gmcm.AddBoolOption(
+                mod: mod,
+                name: I18n.Config_Enable,
+                tooltip: I18n.Config_MushroomLog_Enable_Tooltip,
+                getValue: () => theMod.config.ShowMushroomLogRange,
+                setValue: (v) => theMod.config.ShowMushroomLogRange = v);
+            gmcm.AddKeybindList(
+                mod: mod,
+                name: I18n.Config_Hotkey,
+                tooltip: I18n.Config_MushroomLog_Hotkey_Tooltip,
+                getValue: () => theMod.config.ShowMushroomLogRangeKey,
+                setValue: (v) => theMod.config.ShowMushroomLogRangeKey = v);
+            gmcm.AddBoolOption(
+                mod: mod,
+                name: I18n.Config_ShowOthers,
+                tooltip: I18n.Config_MushroomLog_ShowOthers_Tooltip,
+                getValue: () => theMod.config.ShowOtherMushroomLogsWhenHoldingMushroomLog,
+                setValue: (v) => theMod.config.ShowOtherMushroomLogsWhenHoldingMushroomLog = v);
+            gmcmOpt?.AddColorOption(
+                mod: mod,
+                name: I18n.Config_Tint,
+                tooltip: I18n.Config_MushroomLog_Tint_Tooltip,
+                getValue: () => theMod.config.MushroomLogRangeTint,
+                setValue: (v) => theMod.config.MushroomLogRangeTint = v,
                 colorPickerStyle: defaultColorPickerStyle);
 
             // Bombs

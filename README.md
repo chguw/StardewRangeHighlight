@@ -12,6 +12,7 @@ This mod adds highlighting for the range of the following items and buildings:
 * Sprinklers (including the Prismatic Sprinkler from the Prismatic Tools mod)
 * Scarecrows (including the Deluxe Scarecrow)
 * Bee Houses
+* Mushroom Logs
 * Junimo Huts
 * Bombs (see note below)
 
@@ -81,6 +82,7 @@ highlight colors.  The default configuration is summarized in the table below.
 | Sp**r**inklers | `R` | blue
 | Scarecr**o**ws | `O` | green
 | Bee **H**ouses | `H` | yellow
+| Mushroom Logs | (none) | brown
 | **J**unimo Huts | `J` | white
 | Bombs | (none) | red/orange
 
@@ -91,9 +93,9 @@ You can also configure whether to show the inner and outer ranges of bombs,
 and whether to show the ranges of "ticking" bombs placed on the ground.
 
 There are also settings that control whether other (already placed) sprinklers,
-scarecrows, and beehouses have their ranges highlighted if the currently held
-item is a sprinkler, scarecrow, or beehouse.  By default, this is on for
-sprinklers and scarecrows, and off for beehouses.
+scarecrows, beehouses, and mushroom logs have their ranges highlighted if the currently held
+item is a sprinkler, scarecrow, beehouse, or mushroom log.  By default, this is on for
+sprinklers and scarecrows, and off for beehouses and mushroom logs.
 
 Finally, the Show*THING*Range options allow you to turn off highlighting of *thing*
 completely.  (Maybe you don't want to see it.  Maybe some other mod is already

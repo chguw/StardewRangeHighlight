@@ -1,6 +1,12 @@
 
 # Release Notes
 
+## Version 4.1.1
+
+### User-visible Changes
+
+Added French translation from GitHub user Tenebrosful
+
 ## Version 4.1.0
 
 ### User-visible Changes
